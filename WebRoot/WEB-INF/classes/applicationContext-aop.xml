@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	<bean id="common" class="com.spring.aop.Common" />
+	<bean id="check" class="com.spring.aop.Check" />
+	<aop:config>
+		<aop:aspect id="myAop" ref="check">
+			<aop:pointcut id="target"
+				expression="execution(* com.spring.aop.Common.execute(..))" />
+			<aop:before method="checkValidity" pointcut-ref="target" />
+			<aop:after method="addLog" pointcut-ref="target" />
+		</aop:aspect>
+	</aop:config>
+</beans> 
